@@ -2,7 +2,7 @@
 header("Content-type: application/json; charset=utf-8");
 
 require_once '../../vendor/autoload.php';
-
+use App\Domain\Entities\Ramal;
 
 $ramais = file('../../lib/ramais');
 $filas = file('../../lib/filas');
@@ -37,12 +37,14 @@ foreach ($ramais as $linhas) {
     $arr = array_values($linha);
     if ((trim($arr[0]) !== "Name/username") && (trim($arr[1]) !== "sip")) {
         list($name, $username) = explode('/', $arr[0]);
-        $info_ramais[$name] = array(
-            'nome' => $name,
-            'ramal' => $username,
-            'online' => in_array('OK', $arr) ? true : false,
-            'status' => $status_ramais[$name]['status']
-        );
+        $info_ramais[$name] =
+            new Ramal(
+                $name,
+                $username,
+                in_array('OK', $arr) ? true : false,
+                $status_ramais[$name]['status']
+
+            );
     }
 }
 
