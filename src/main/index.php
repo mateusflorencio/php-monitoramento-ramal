@@ -1,9 +1,10 @@
 <?php
 
-/**
- * Você deverá transformar em uma classe
- */
+require_once '../../vendor/autoload.php';
+
+
 header("Content-type: application/json; charset=utf-8");
+
 
 $ramais = file('../../lib/ramais');
 $filas = file('../../lib/filas');

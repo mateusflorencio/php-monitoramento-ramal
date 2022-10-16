@@ -10,7 +10,7 @@ $.ajax({
         }
         
     },
-    error: function(){
-        console.log("Errouu!")
+    error: function(e){
+        console.log(e)
     }
 });
