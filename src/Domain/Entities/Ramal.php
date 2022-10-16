@@ -4,16 +4,18 @@ namespace App\Domain\Entities;
 
 class Ramal
 {
-  private $name;
-  private $ramal;
-  private $online;
-  private $status;
+  public $nome;
+  public $ramal;
+  public $online;
+  public $status;
 
-  public function __construct($name, $ramal, $online, $status)
+  public function __construct($nome, $ramal, $online, $status)
   {
-    $this->name = $name;
+    $this->nome = $nome;
     $this->ramal = $ramal;
     $this->online = $online;
     $this->status = $status;
   }
+
+  
 }
