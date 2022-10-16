@@ -1,5 +1,5 @@
 $.ajax({
-    url: "./lib/ramais.php",
+    url: "./src/main/index.php",
     type: "GET",
     success: function(data){                
         for(let i in data){

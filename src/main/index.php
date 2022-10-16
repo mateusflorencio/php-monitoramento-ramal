@@ -5,8 +5,8 @@
  */
 header("Content-type: application/json; charset=utf-8");
 
-$ramais = file('ramais');
-$filas = file('filas');
+$ramais = file('../../lib/ramais');
+$filas = file('../../lib/filas');
 
 $status_ramais = array();
 foreach ($filas as $linhas) {
