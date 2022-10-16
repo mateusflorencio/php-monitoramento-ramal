@@ -1,5 +1,5 @@
 $.ajax({
-    url: "http://l5d1137.callbox.com.br/monitoramento/lib/ramais.php",
+    url: "./lib/ramais.php",
     type: "GET",
     success: function(data){                
         for(let i in data){
