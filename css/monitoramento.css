@@ -11,6 +11,11 @@
     margin: 2px;
 }
 
+.bg_indisponivel {
+    
+    background-color: #9ca3af;
+}
+
 .ocupado {
     width: 15px;
     height: 15px;
@@ -24,6 +29,13 @@
     border-radius: 50%;
     background-color: #ff0000;
     animation: piscar 1s linear infinite;
+}
+
+.indisponivel {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #1f2937;
 }
 
 @keyframes piscar {
