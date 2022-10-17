@@ -20,28 +20,16 @@ class LoadFiles
     foreach ($pathFile as $linhas) {
       if (strstr($linhas, 'SIP/')) {
         if (strstr($linhas, '(Ring)')) {
-          $this->statusFilas[$this->getRamal($linhas)] = array(
-            'status' => 'chamando',
-            'agente' => $this->getAgente($linhas)
-          );
+          $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'chamando');
         }
         if (strstr($linhas, '(In use)')) {
-          $this->statusFilas[$this->getRamal($linhas)] = array(
-            'status' => 'ocupado',
-            'agente' => $this->getAgente($linhas)
-          );
+          $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'ocupado');
         }
         if (strstr($linhas, '(Not in use)')) {
-          $this->statusFilas[$this->getRamal($linhas)] = array(
-            'status' => 'disponivel',
-            'agente' => $this->getAgente($linhas)
-          );
+          $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'disponivel');
         }
         if (strstr($linhas, '(Unavailable)')) {
-          $this->statusFilas[$this->getRamal($linhas)] = array(
-            'status' => 'indisponivel',
-            'agente' => $this->getAgente($linhas)
-          );
+          $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'indisponivel');
         }
       }
     }
@@ -58,8 +46,7 @@ class LoadFiles
           $name,
           $username,
           in_array('OK', $arr) ? true : false,
-          $this->statusFilas[$name]['status'],
-          $this->statusFilas[$name]['agente']
+          $this->statusFilas[$name]['status']
 
         );
       }
@@ -71,12 +58,6 @@ class LoadFiles
     $linha = explode(' ', trim($linhas));
     $explode = explode('/', $linha[0]);
     return  $explode[1];
-  }
-
-  private function getAgente($linhas)
-  {
-    $linha = explode(' ', trim($linhas));
-    return  array_pop($linha);
   }
 
   public function getStatusRamal()
