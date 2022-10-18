@@ -17,5 +17,23 @@ class Ramal
     $this->status = $status;
   }
 
-  
+  public function getNome()
+  {
+    return $this->nome;
+  }
+
+  public function getRamal()
+  {
+    return $this->ramal;
+  }
+
+  public function getOnline()
+  {
+    return $this->online;
+  }
+
+  public function getStatus()
+  {
+    return $this->status;
+  }
 }
