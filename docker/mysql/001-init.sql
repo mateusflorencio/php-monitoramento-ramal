@@ -1,2 +1,10 @@
-CREATE TABLE  ramais (
+CREATE TABLE ramais (
+  id INT NOT NULL AUTO_INCREMENT,
+  numero VARCHAR(150) NOT NULL,
+  ramal VARCHAR(150) NOT NULL UNIQUE,
+  online BOOLEAN DEFAULT FALSE,
+  status VARCHAR(150) DEFAULT 'indisponivel',
+  agente VARCHAR(150) NOT NULL,
+  historico INT DEFAULT 0,
+  PRIMARY KEY(id)
 );
