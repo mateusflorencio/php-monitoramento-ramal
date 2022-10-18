@@ -3,13 +3,14 @@ header("Content-type: application/json; charset=utf-8");
 
 require_once '../../vendor/autoload.php';
 
-use App\Domain\Usecase\LoadFiles;
+use App\External\Data\Database;
+use App\Main\Factory\ControllerRamalFactory;
+
+Database::setConnection();
 
 $ramais = file('../../lib/ramais');
 $filas = file('../../lib/filas');
 
-$loadFiles = new LoadFiles();
-$loadFiles->handle($filas, $ramais);
-$statusRamais = $loadFiles->getStatusRamal();
+$statusRamais = ControllerRamalFactory::factory($filas, $ramais);
 
 echo json_encode($statusRamais);
