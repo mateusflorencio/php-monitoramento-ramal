@@ -2,6 +2,7 @@
 
 namespace App\Domain\Usecase;
 
+use App\Domain\Usecase\Contracts\FindRamalInterface;
 use App\Domain\Usecase\Contracts\RamalDatabase;
 use App\Domain\Usecase\Contracts\SaveRamalInterface;
 
@@ -17,15 +18,13 @@ class SaveRamal implements SaveRamalInterface
   public function save($ramal)
   {
     $ar = array(
-      'id' => null,
-      'numero' => $ramal->getNome(),
       'ramal' => $ramal->getRamal(),
+      'numero' => $ramal->getNome(),
       'online' => $ramal->getOnline() ? 1 : 0,
       'status' => $ramal->getStatus(),
       'historico' => 0,
       'agente' => 'nhono',
     );
-
-    $this->db->insert($ar, 'ramais');
+    $this->db->save($ar);
   }
 }

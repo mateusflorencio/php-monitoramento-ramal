@@ -14,12 +14,12 @@ class MySqlRamal implements RamalDatabase
     return $statement;
   }
 
-  public function insert($values, $table)
+  public function save($ramal)
   {
-    $fields = array_keys($values);
-    $binds = array_pad([], count($values), '?');
+    $fields = array_keys($ramal);
+    $binds = array_pad([], count($ramal), '?');
 
-    $query = 'INSERT INTO ' . $table . ' (' . implode(',', $fields) . ') VALUES (' . implode(',', $binds) . ')';
-    $this->execute($query, array_values($values));
+    $query = 'REPLACE INTO ramais (' . implode(',', $fields) . ') VALUES (' . implode(',', $binds) . ')';
+    $this->execute($query, array_values($ramal));
   }
 }

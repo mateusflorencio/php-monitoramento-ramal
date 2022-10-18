@@ -3,11 +3,11 @@
 namespace App\Domain\Usecase\Contracts;
 
 interface RamalDatabase
-
-/**
- * @param Ramal $ramal
- * @param string $table
- */
 {
-  public function insert($ramal, $table);
+
+  /**
+   * @param array[Ramal] $ramal
+   * @param string $table
+   */
+  public function save($ramal);
 }
