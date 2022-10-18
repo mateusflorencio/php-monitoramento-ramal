@@ -3,41 +3,43 @@
 namespace App\Domain\Usecase;
 
 use App\Domain\Entities\Ramal;
+use App\Domain\Usecase\Contracts\HandleRamalInterface;
 
-class LoadFiles
+class HandleRamal implements HandleRamalInterface
 {
   private array $statusFilas;
   private array $statusRamais;
 
-  public function handle($pathFilas, $pathRamais)
+  public function handle($dirFila, $dirRamais)
   {
-    $this->handleFilas($pathFilas);
-    $this->handleRamais($pathRamais);
+    $this->handleFilas($dirFila);
+    $this->handleRamais($dirRamais);
+
+    if ($this->statusFilas && $this->statusRamais) {
+      return $this->statusRamais;
+    }
   }
 
-  private function handleFilas($pathFile)
+  private function handleFilas($dirFila)
   {
-    foreach ($pathFile as $linhas) {
+    foreach ($dirFila as $linhas) {
       if (strstr($linhas, 'SIP/')) {
         if (strstr($linhas, '(Ring)')) {
           $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'chamando');
-        }
-        if (strstr($linhas, '(In use)')) {
+        } elseif (strstr($linhas, '(In use)')) {
           $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'ocupado');
-        }
-        if (strstr($linhas, '(Not in use)')) {
+        } elseif (strstr($linhas, '(Not in use)')) {
           $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'disponivel');
-        }
-        if (strstr($linhas, '(Unavailable)')) {
+        } elseif (strstr($linhas, '(Unavailable)')) {
           $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'indisponivel');
         }
       }
     }
   }
 
-  private function  handleRamais($pathRamais)
+  private function  handleRamais($dirRamais)
   {
-    foreach ($pathRamais as $linhas) {
+    foreach ($dirRamais as $linhas) {
       $linha = array_filter(explode(' ', $linhas));
       $arr = array_values($linha);
       if ((trim($arr[0]) !== "Name/username") && (trim($arr[1]) !== "sip")) {
@@ -58,10 +60,5 @@ class LoadFiles
     $linha = explode(' ', trim($linhas));
     $explode = explode('/', $linha[0]);
     return  $explode[1];
-  }
-
-  public function getStatusRamal()
-  {
-    return $this->statusRamais;
   }
 }
