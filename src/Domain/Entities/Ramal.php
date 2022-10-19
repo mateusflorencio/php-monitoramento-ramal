@@ -8,18 +8,20 @@ class Ramal
   public $ramal;
   public $online;
   public $status;
+  public $historico;
 
-  public function __construct($nome, $ramal, $online, $status)
+  public function __construct($ramal, $userName, $status, $agente, $historico)
   {
-    $this->nome = $nome;
     $this->ramal = $ramal;
-    $this->online = $online;
+    $this->userName = $userName;
     $this->status = $status;
+    $this->agente = $agente;
+    $this->historico = $historico;
   }
 
-  public function getNome()
+  public function getuserName()
   {
-    return $this->nome;
+    return $this->userName;
   }
 
   public function getRamal()
@@ -27,13 +29,18 @@ class Ramal
     return $this->ramal;
   }
 
-  public function getOnline()
-  {
-    return $this->online;
-  }
-
   public function getStatus()
   {
     return $this->status;
+  }
+
+  public function getAgente()
+  {
+    return $this->agente;
+  }
+
+  public function getHistorico()
+  {
+    return $this->historico;
   }
 }

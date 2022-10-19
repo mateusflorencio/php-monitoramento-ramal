@@ -33,6 +33,8 @@ class HandleRamal implements HandleRamalInterface
         } elseif (strstr($linhas, '(Unavailable)')) {
           $this->statusFilas[$this->getRamal($linhas)] = array('status' => 'indisponivel');
         }
+        $this->statusFilas[$this->getRamal($linhas) . 'agente'] = array('nome' => $this->getNome($linhas));
+        $this->statusFilas[$this->getRamal($linhas) . 'historico'] = array('historico' => $this->getHistorico($linhas));
       }
     }
   }
@@ -43,13 +45,13 @@ class HandleRamal implements HandleRamalInterface
       $linha = array_filter(explode(' ', $linhas));
       $arr = array_values($linha);
       if ((trim($arr[0]) !== "Name/username") && (trim($arr[1]) !== "sip")) {
-        list($name, $username) = explode('/', $arr[0]);
-        $this->statusRamais[$name] = new Ramal(
-          $name,
+        list($ramal, $username) = explode('/', $arr[0]);
+        $this->statusRamais[$ramal] = new Ramal(
+          $ramal,
           $username,
-          in_array('OK', $arr) ? true : false,
-          $this->statusFilas[$name]['status']
-
+          $this->statusFilas[$ramal]['status'],
+          $this->statusFilas[$ramal . 'agente']['nome'],
+          $this->statusFilas[$ramal . 'historico']['historico']
         );
       }
     }
@@ -60,5 +62,23 @@ class HandleRamal implements HandleRamalInterface
     $linha = explode(' ', trim($linhas));
     $explode = explode('/', $linha[0]);
     return  $explode[1];
+  }
+
+  private function getNome($linhas)
+  {
+    $arr = explode(' ', trim($linhas));
+    return  array_pop($arr);
+  }
+
+  /**
+   * @param string $linhas
+   * @return integer
+   */
+
+  private function getHistorico($linhas)
+  {
+    $arr = explode(' ', trim($linhas));
+    $res = array_search('calls', $arr);
+    return $arr[$res - 1] == 'no' ? 0 : (int)$arr[$res - 1];
   }
 }
