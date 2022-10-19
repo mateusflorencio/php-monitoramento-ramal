@@ -22,4 +22,11 @@ class MySqlRamal implements RamalDatabase
     $query = 'REPLACE INTO ramais (' . implode(',', $fields) . ') VALUES (' . implode(',', $binds) . ')';
     $this->execute($query, array_values($ramal));
   }
+
+  public function loadAll()
+  {
+    $query = 'SELECT * FROM ramais';
+    $statement = $this->execute($query);
+    return  $statement->fetchAll();
+  }
 }

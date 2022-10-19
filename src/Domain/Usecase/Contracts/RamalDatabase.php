@@ -10,4 +10,9 @@ interface RamalDatabase
    * @param string $table
    */
   public function save($ramal);
+
+  /**
+   * @return array[Ramal]
+   */
+  public function loadAll();
 }

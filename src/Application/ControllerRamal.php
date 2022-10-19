@@ -3,6 +3,7 @@
 namespace App\Application;
 
 use App\Domain\Usecase\Contracts\HandleRamalInterface;
+use App\Domain\Usecase\Contracts\LoadAllRamalInterface;
 use App\Domain\Usecase\Contracts\SaveRamalInterface;
 
 class ControllerRamal
@@ -11,13 +12,15 @@ class ControllerRamal
   private $dirFila;
   private $handleDir;
   private $save;
+  private $loadAll;
 
-  public function __construct($dirFila, $dirRamal, HandleRamalInterface $handleDir, SaveRamalInterface $save)
+  public function __construct($dirFila, $dirRamal, HandleRamalInterface $handleDir, SaveRamalInterface $save, LoadAllRamalInterface $loadAll)
   {
     $this->handleDir = $handleDir;
     $this->save = $save;
     $this->dirRamal = $dirRamal;
     $this->dirFila = $dirFila;
+    $this->loadAll = $loadAll;
   }
 
   public function perform()
@@ -28,6 +31,6 @@ class ControllerRamal
         $this->save->save($ramal, 'ramais');
       }
     }
-    return $statusRamais;
+    return $this->loadAll->loadAll();
   }
 }

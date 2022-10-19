@@ -4,6 +4,7 @@ namespace App\Main\Factory;
 
 use App\Application\ControllerRamal;
 use App\Domain\Usecase\HandleRamal;
+use App\Domain\Usecase\LoadAllRamal;
 use App\Domain\Usecase\SaveRamal;
 
 class ControllerRamalFactory
@@ -18,7 +19,9 @@ class ControllerRamalFactory
     $ramal = new HandleRamal();
     $mySqlRamalDb = MySqlRamalFactory::factory();
     $save = new SaveRamal($mySqlRamalDb);
-    $controller = new ControllerRamal($dirFila, $dirRamal, $ramal, $save);
+    $loadAll = new LoadAllRamal($mySqlRamalDb);
+
+    $controller = new ControllerRamal($dirFila, $dirRamal, $ramal, $save, $loadAll);
     return $controller->perform();
   }
 }
