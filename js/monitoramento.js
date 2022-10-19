@@ -4,7 +4,9 @@ $.ajax({
     success: function(data){                
         for(let i in data){
             $('#cartoes').append(`<div class="${['cartao', 'bg_' + data[i].status].join(' ')}">
-                                <div>${data[i].userName}</div>
+                                <div>${data[i].ramal}</div>
+                                <div>${data[i].userName}/${data[i].agente}</div>
+                                <span>Calls: ${data[i].historico}</span>
                                 <span class="${data[i].status} icone-posicao"></span>
                               </div>`)
         }
