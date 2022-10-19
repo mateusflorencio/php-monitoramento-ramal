@@ -2,5 +2,8 @@
 
 ## MELHORIAS:
 
- 1.  ### *Melhoria 1*:
-     * Descrição melhoria 1.
+ 1.  ### Adicionado a tabela o nome do agente
+ 2.  ### Adicionado a tabela a quantidate de ligação feita pelo agente
+ 3.  ### Melhorado a divisão de classes
+ 4.  ### Usando Injeção de Dependências nas Classes
+ 5.  ### Dando a cada classe sua unica função 
