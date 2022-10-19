@@ -6,7 +6,7 @@ const load = ()=> {
         success: function(data){ 
             for(let i in data){
                 $('#cartoes').append(`<div class="${['cartao', 'bg_' + data[i].status].join(' ')}">
-                                    <div>${data[i].ramal}</div>
+                                    <div><strong>${data[i].ramal}s</strong></div>
                                     <div>${data[i].username}/${data[i].agente}</div>
                                     <span>Calls: ${data[i].historico}</span>
                                     <span class="${data[i].status} icone-posicao"></span>
